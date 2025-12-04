@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://bestemailtemplate.com'),
   title: {
     default: "575 Free HTML Email Templates | Best Email Template",
     template: "%s | Best Email Template"
@@ -30,6 +31,9 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
     },
+  },
+  alternates: {
+    canonical: '/',
   },
   openGraph: {
     type: "website",

@@ -5,6 +5,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Terms & Conditions | Best Email Template',
   description: 'Terms and conditions for using Best Email Template.',
+  alternates: {
+    canonical: '/terms',
+  },
 };
 
 export default function TermsPage() {

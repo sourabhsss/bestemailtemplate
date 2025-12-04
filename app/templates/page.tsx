@@ -8,6 +8,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: "575 Free HTML Email Templates",
   description: "Mobile responsive, customizable HTML email templates built on Figma for various use cases across industries. Browse our collection of 575+ free email templates.",
+  alternates: {
+    canonical: '/templates',
+  },
   openGraph: {
     title: "575 Free HTML Email Templates",
     description: "Mobile responsive, customizable HTML email templates built on Figma for various use cases across industries.",

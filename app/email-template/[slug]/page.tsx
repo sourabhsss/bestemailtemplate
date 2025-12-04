@@ -47,6 +47,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       ...template.supportedEmailClients,
       ...template.supportedESPs,
     ].filter(Boolean),
+    alternates: {
+      canonical: `/email-template/${slug}`,
+    },
     openGraph: {
       title,
       description,

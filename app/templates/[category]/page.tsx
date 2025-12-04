@@ -63,6 +63,9 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   return {
     title,
     description,
+    alternates: {
+      canonical: `/templates/${categorySlug}`,
+    },
     openGraph: {
       title,
       description,

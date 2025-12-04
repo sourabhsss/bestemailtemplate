@@ -34,7 +34,9 @@ export function TemplateCard({
             src={thumbnailUrl}
             alt={title}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover object-top transition-smooth group-hover:scale-105"
+            priority={false}
           />
           
           {/* Permanent Bottom Shadow - Always Visible */}

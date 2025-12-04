@@ -36,7 +36,7 @@ export default function TermsPage() {
                 <li>Use the materials for any commercial purpose without proper attribution</li>
                 <li>Attempt to decompile or reverse engineer any software contained on Best Email Template</li>
                 <li>Remove any copyright or other proprietary notations from the materials</li>
-                <li>Transfer the materials to another person or "mirror" the materials on any other server</li>
+                <li>Transfer the materials to another person or &quot;mirror&quot; the materials on any other server</li>
               </ul>
               <p className="leading-relaxed mt-4">
                 This license shall automatically terminate if you violate any of these restrictions and may be terminated by 
@@ -61,7 +61,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">Disclaimer</h2>
               <p className="leading-relaxed">
-                The materials on Best Email Template are provided on an 'as is' basis. Best Email Template makes no warranties, 
+                The materials on Best Email Template are provided on an &apos;as is&apos; basis. Best Email Template makes no warranties, 
                 expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied 
                 warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual 
                 property or other violation of rights.
@@ -92,7 +92,7 @@ export default function TermsPage() {
               <p className="leading-relaxed">
                 Best Email Template has not reviewed all of the sites linked to its website and is not responsible for the contents 
                 of any such linked site. The inclusion of any link does not imply endorsement by Best Email Template of the site. 
-                Use of any such linked website is at the user's own risk.
+                Use of any such linked website is at the user&apos;s own risk.
               </p>
             </section>
 

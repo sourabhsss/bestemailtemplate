@@ -12,6 +12,14 @@ import { Mail, Tag, Briefcase, Zap, Monitor } from 'lucide-react';
 import { slugify } from '@/lib/slug-utils';
 import { Metadata } from 'next';
 
+export async function generateStaticParams() {
+  const templates = getTemplates();
+  
+  return templates.map((template) => ({
+    slug: template.slug || template.id,
+  }));
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const template = getTemplateById(slug);

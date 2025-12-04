@@ -7,6 +7,32 @@ import { CategoryPageClient } from '@/components/CategoryPageClient';
 import { slugify } from '@/lib/slug-utils';
 import { Metadata } from 'next';
 
+export async function generateStaticParams() {
+  const templates = getTemplates();
+  const categories = getCategories();
+  
+  // Get all unique category slugs from templates
+  const categorySlugs = new Set<string>();
+  
+  // Add category URL paths
+  categories.forEach(cat => {
+    categorySlugs.add(cat.urlPath);
+  });
+  
+  // Add all unique industries, use cases, types, email clients, and ESPs
+  templates.forEach(template => {
+    categorySlugs.add(slugify(template.industry));
+    categorySlugs.add(slugify(template.useCase));
+    categorySlugs.add(slugify(template.type));
+    template.supportedEmailClients.forEach(client => categorySlugs.add(slugify(client)));
+    template.supportedESPs.forEach(esp => categorySlugs.add(slugify(esp)));
+  });
+  
+  return Array.from(categorySlugs).map(slug => ({
+    category: slug,
+  }));
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {
   const { category: categoryParam } = await params;
   const categorySlug = decodeURIComponent(categoryParam);

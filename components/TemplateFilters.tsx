@@ -18,9 +18,6 @@ const topCategories = ['Ecommerce', 'Fashion', 'Marketing'];
 
 export function TemplateFilters({
   filterOptions,
-  resultCount,
-  totalCount,
-  showAllOptions = false,
 }: TemplateFiltersProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 

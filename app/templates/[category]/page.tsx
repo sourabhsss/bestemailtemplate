@@ -7,10 +7,10 @@ import { CategoryPageClient } from '@/components/CategoryPageClient';
 import { slugify } from '@/lib/slug-utils';
 import { Metadata } from 'next';
 
-export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
-  const categorySlug = decodeURIComponent(params.category);
+export async function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {
+  const { category: categoryParam } = await params;
+  const categorySlug = decodeURIComponent(categoryParam);
   const categories = getCategories();
-  const allTemplates = getTemplates();
   
   const category = categories.find((c) => c.urlPath.toLowerCase() === categorySlug.toLowerCase());
   
@@ -49,8 +49,9 @@ export async function generateMetadata({ params }: { params: { category: string 
   };
 }
 
-export default function CategoryPage({ params }: { params: { category: string } }) {
-  const categorySlug = decodeURIComponent(params.category);
+export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
+  const { category: categoryParam } = await params;
+  const categorySlug = decodeURIComponent(categoryParam);
   const allTemplates = getTemplates();
   const categories = getCategories();
   

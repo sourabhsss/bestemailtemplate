@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { getTemplates, getTemplateById, getRelatedTemplates } from '@/lib/templates-data';
+import { getTemplates, getTemplateById } from '@/lib/templates-data';
 import { TemplateCard } from '@/components/TemplateCard';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -12,8 +12,9 @@ import { Mail, Tag, Briefcase, Zap, Monitor } from 'lucide-react';
 import { slugify } from '@/lib/slug-utils';
 import { Metadata } from 'next';
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const template = getTemplateById(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const template = getTemplateById(slug);
 
   if (!template) {
     return {
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   const title = template.title;
-  const description = template.metaDescription || template.description || `${template.title} - Free HTML email template for ${template.useCase}`;
+  const description = template.description || `${template.title} - Free HTML email template for ${template.useCase}`;
 
   return {
     title,
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     openGraph: {
       title,
       description,
-      url: `https://bestemailtemplate.com/email-template/${params.slug}`,
+      url: `https://bestemailtemplate.com/email-template/${slug}`,
       images: template.thumbnailUrl ? [{ url: template.thumbnailUrl, alt: template.title }] : [],
     },
     twitter: {
@@ -53,8 +54,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default function TemplatePage({ params }: { params: { slug: string } }) {
-  const template = getTemplateById(params.slug);
+export default async function TemplatePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const template = getTemplateById(slug);
 
   if (!template) {
     notFound();
@@ -95,11 +97,12 @@ export default function TemplatePage({ params }: { params: { slug: string } }) {
             {/* Left Column - Template Preview */}
             <div className="flex justify-center lg:justify-start">
               <div className="relative w-full max-w-md">
-                <div className="relative aspect-[3/4] rounded-lg overflow-y-auto border border-primary/20 shadow-lg">
-                  <img
+                <div className="relative aspect-[3/4] rounded-lg overflow-hidden border border-primary/20 shadow-lg">
+                  <Image
                     src={template.thumbnailUrl}
                     alt={template.title}
-                    className="w-full h-auto min-h-full object-cover object-top"
+                    fill
+                    className="object-cover object-top"
                   />
                 </div>
               </div>

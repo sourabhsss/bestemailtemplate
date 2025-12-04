@@ -1,9 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
-
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-background via-secondary/30 to-background py-12 sm:py-16">

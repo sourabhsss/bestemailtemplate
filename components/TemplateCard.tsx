@@ -2,10 +2,9 @@
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Eye } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface TemplateCardProps {
   id: string;
@@ -24,11 +23,7 @@ export function TemplateCard({
   id, 
   title, 
   description, 
-  thumbnailUrl,
-  industry,
-  useCase,
-  type,
-  showTags = false
+  thumbnailUrl
 }: TemplateCardProps) {
   return (
     <Card className="group cursor-pointer overflow-hidden border-0 transition-smooth hover-lift bg-card card-shadow-lg hover:card-shadow-xl p-0" style={{ border: 'none' }}>

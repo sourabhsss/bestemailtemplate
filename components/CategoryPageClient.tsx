@@ -15,7 +15,7 @@ interface CategoryPageClientProps {
 
 const ITEMS_PER_PAGE = 20;
 
-export function CategoryPageClient({ templates, allTemplates, currentCategory }: CategoryPageClientProps) {
+export function CategoryPageClient({ templates, allTemplates }: CategoryPageClientProps) {
   const filterOptions = useMemo(() => extractFilterOptions(allTemplates), [allTemplates]);
   const [currentPage, setCurrentPage] = useState(1);
 

@@ -73,7 +73,7 @@ function stripHtmlTags(html: string): string {
 }
 
 export function getCategories(): Category[] {
-  const rawData = readCSV<any>('data/categories.csv');
+  const rawData = readCSV<Record<string, string>>('data/categories.csv');
   
   return rawData.map(row => ({
     listingName: row['Listing Name'] || '',
@@ -92,7 +92,7 @@ export function getCategories(): Category[] {
 }
 
 export function getTemplates(): Template[] {
-  const rawData = readCSV<any>('data/templates.csv');
+  const rawData = readCSV<Record<string, string>>('data/templates.csv');
   
   return rawData.map(row => ({
     id: row['Item ID'] || row['Slug'] || '',

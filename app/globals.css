@@ -1,26 +1,547 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "tw-animate-css";
 
 @theme inline {
+  /* Base colors */
   --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-tertiary: var(--background-tertiary);
   --color-foreground: var(--foreground);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-foreground-muted: var(--foreground-muted);
+  
+  /* Primary colors with shades */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-50: var(--primary-50);
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+  --color-primary-300: var(--primary-300);
+  --color-primary-400: var(--primary-400);
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
+  --color-primary-700: var(--primary-700);
+  --color-primary-800: var(--primary-800);
+  --color-primary-900: var(--primary-900);
+  
+  /* Secondary colors with shades */
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-50: var(--secondary-50);
+  --color-secondary-100: var(--secondary-100);
+  --color-secondary-200: var(--secondary-200);
+  --color-secondary-300: var(--secondary-300);
+  --color-secondary-400: var(--secondary-400);
+  --color-secondary-500: var(--secondary-500);
+  
+  /* Accent colors with shades */
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-50: var(--accent-50);
+  --color-accent-100: var(--accent-100);
+  --color-accent-200: var(--accent-200);
+  --color-accent-300: var(--accent-300);
+  --color-accent-400: var(--accent-400);
+  --color-accent-500: var(--accent-500);
+  --color-accent-600: var(--accent-600);
+  
+  /* Neutral colors */
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+  
+  /* Muted colors */
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  
+  /* Semantic colors */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-light: var(--success-light);
+  --color-success-dark: var(--success-dark);
+  
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-light: var(--warning-light);
+  --color-warning-dark: var(--warning-dark);
+  
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-light: var(--destructive-light);
+  --color-destructive-dark: var(--destructive-dark);
+  
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-light: var(--info-light);
+  --color-info-dark: var(--info-dark);
+  
+  /* Border and input */
+  --color-border: var(--border);
+  --color-border-light: var(--border-light);
+  --color-border-dark: var(--border-dark);
+  --color-input: var(--input);
+  --color-input-focus: var(--input-focus);
+  --color-ring: var(--ring);
+  
+  /* Card colors */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-card-hover: var(--card-hover);
+  
+  /* Popover colors */
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  
+  /* Gradient colors */
+  --color-gradient-start: var(--gradient-start);
+  --color-gradient-middle: var(--gradient-middle);
+  --color-gradient-end: var(--gradient-end);
+  --color-gradient-warm-start: var(--gradient-warm-start);
+  --color-gradient-warm-end: var(--gradient-warm-end);
+  --color-gradient-cool-start: var(--gradient-cool-start);
+  --color-gradient-cool-end: var(--gradient-cool-end);
+  
+  /* Glass effect */
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+  --color-glass-dark-bg: var(--glass-dark-bg);
+  
+  /* Chart colors */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+  --color-chart-7: var(--chart-7);
+  --color-chart-8: var(--chart-8);
+  
+  /* Sidebar colors */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* Vibrant accent colors */
+  --color-vibrant-blue: var(--vibrant-blue);
+  --color-vibrant-green: var(--vibrant-green);
+  --color-vibrant-orange: var(--vibrant-orange);
+  --color-vibrant-pink: var(--vibrant-pink);
+  --color-vibrant-purple: var(--vibrant-purple);
+  --color-vibrant-teal: var(--vibrant-teal);
+  --color-vibrant-cyan: var(--vibrant-cyan);
+  --color-vibrant-red: var(--vibrant-red);
+  --color-vibrant-yellow: var(--vibrant-yellow);
+  
+  /* Green Harmony Palette (Palette 5 from Coolors) */
+  --color-tea-green: var(--tea-green);
+  --color-celadon: var(--celadon);
+  --color-ocean-mist: var(--ocean-mist);
+  --color-french-blue: var(--french-blue);
+  --color-deep-purple: var(--deep-purple);
+  
+  /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* Border radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Border radius */
+  --radius: 12px;
+  
+  /* ===== PRIMARY COLOR PALETTE ===== */
+  /* Main brand color - Ocean Mist (Palette 5) */
+  --primary: #5FB49C;
+  --primary-foreground: #ffffff;
+  --primary-50: #f0faf8;
+  --primary-100: #d4f1eb;
+  --primary-200: #a9e3d7;
+  --primary-300: #7dd5c3;
+  --primary-400: #5FB49C;
+  --primary-500: #4a9d87;
+  --primary-600: #3d8270;
+  --primary-700: #2f6759;
+  --primary-800: #214c42;
+  --primary-900: #14312b;
+  
+  /* ===== BACKGROUND COLORS ===== */
+  --background: #FAFAFA;
+  --background-secondary: #F5F5F5;
+  --background-tertiary: #EEEEEE;
+  --foreground: #1A1A2E;
+  --foreground-secondary: #2D2D44;
+  --foreground-muted: #52525B;
+  
+  /* ===== CARD COLORS ===== */
+  --card: #ffffff;
+  --card-foreground: #1A1A2E;
+  --card-hover: #F9FAFB;
+  
+  /* ===== POPOVER COLORS ===== */
+  --popover: #ffffff;
+  --popover-foreground: #1A1A2E;
+  
+  /* ===== SECONDARY COLORS ===== */
+  /* Celadon - Soft mint green (Palette 5) */
+  --secondary: #98DFAF;
+  --secondary-foreground: #1a4d2e;
+  --secondary-50: #f3fcf7;
+  --secondary-100: #d9f5e5;
+  --secondary-200: #b3ebcb;
+  --secondary-300: #98DFAF;
+  --secondary-400: #7dd399;
+  --secondary-500: #62c783;
+  
+  /* ===== ACCENT COLORS ===== */
+  /* French Blue - Deep blue-purple (Palette 5) */
+  --accent: #414288;
+  --accent-foreground: #ffffff;
+  --accent-50: #f1f1f8;
+  --accent-100: #d9d9ed;
+  --accent-200: #b3b3db;
+  --accent-300: #8c8cc9;
+  --accent-400: #6767b7;
+  --accent-500: #414288;
+  --accent-600: #34356d;
+  
+  /* ===== NEUTRAL COLORS ===== */
+  --muted: #F3F4F6;
+  --muted-foreground: #6B7280;
+  --neutral-50: #FAFAFA;
+  --neutral-100: #F5F5F5;
+  --neutral-200: #E5E5E5;
+  --neutral-300: #D4D4D4;
+  --neutral-400: #A3A3A3;
+  --neutral-500: #737373;
+  --neutral-600: #525252;
+  --neutral-700: #404040;
+  --neutral-800: #262626;
+  --neutral-900: #171717;
+  
+  /* ===== SEMANTIC COLORS ===== */
+  /* Success - Green tones */
+  --success: #10B981;
+  --success-foreground: #ffffff;
+  --success-light: #D1FAE5;
+  --success-dark: #047857;
+  
+  /* Warning - Amber/Orange */
+  --warning: #F59E0B;
+  --warning-foreground: #ffffff;
+  --warning-light: #FEF3C7;
+  --warning-dark: #D97706;
+  
+  /* Error/Destructive - Red */
+  --destructive: #EF4444;
+  --destructive-foreground: #ffffff;
+  --destructive-light: #FEE2E2;
+  --destructive-dark: #DC2626;
+  
+  /* Info - Blue */
+  --info: #3B82F6;
+  --info-foreground: #ffffff;
+  --info-light: #DBEAFE;
+  --info-dark: #1D4ED8;
+  
+  /* ===== BORDER & INPUT ===== */
+  --border: #E5E7EB;
+  --border-light: #F3F4F6;
+  --border-dark: #D1D5DB;
+  --input: #E5E7EB;
+  --input-focus: #5FB49C;
+  --ring: #5FB49C;
+  
+  /* ===== GRADIENT COLORS ===== */
+  --gradient-start: #DEEFB7;
+  --gradient-middle: #98DFAF;
+  --gradient-end: #414288;
+  --gradient-warm-start: #98DFAF;
+  --gradient-warm-end: #682D63;
+  --gradient-cool-start: #DEEFB7;
+  --gradient-cool-end: #5FB49C;
+  
+  /* ===== GLASS EFFECT ===== */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-dark-bg: rgba(26, 26, 46, 0.7);
+  
+  /* ===== CHART COLORS ===== */
+  --chart-1: #5FB49C;
+  --chart-2: #414288;
+  --chart-3: #98DFAF;
+  --chart-4: #682D63;
+  --chart-5: #DEEFB7;
+  --chart-6: #8B5CF6;
+  --chart-7: #14B8A6;
+  --chart-8: #F97316;
+  
+  /* ===== SIDEBAR COLORS ===== */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1A1A2E;
+  --sidebar-primary: #5FB49C;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #DEEFB7;
+  --sidebar-accent-foreground: #2f6759;
+  --sidebar-border: #E5E7EB;
+  --sidebar-ring: #5FB49C;
+  
+  /* ===== VIBRANT ACCENT COLORS ===== */
+  --vibrant-blue: #414288;
+  --vibrant-green: #5FB49C;
+  --vibrant-orange: #F59E0B;
+  --vibrant-pink: #682D63;
+  --vibrant-purple: #682D63;
+  --vibrant-teal: #98DFAF;
+  --vibrant-cyan: #5FB49C;
+  --vibrant-red: #EF4444;
+  --vibrant-yellow: #DEEFB7;
+  
+  /* ===== GREEN HARMONY PALETTE ===== */
+  /* Fresh organic green palette from Coolors - Palette 5 */
+  --tea-green: #DEEFB7;
+  --celadon: #98DFAF;
+  --ocean-mist: #5FB49C;
+  --french-blue: #414288;
+  --deep-purple: #682D63;
+  
+  /* ===== SHADOW COLORS ===== */
+  --shadow-sm: 0 1px 2px 0 rgba(95, 180, 156, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(95, 180, 156, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(95, 180, 156, 0.15);
+  --shadow-xl: 0 20px 25px -5px rgba(95, 180, 156, 0.2);
+}
+
+.dark {
+  /* Background colors */
+  --background: #0a0f1e;
+  --foreground: #f8fafc;
+  
+  /* Card colors */
+  --card: #1a1f2e;
+  --card-foreground: #f8fafc;
+  
+  /* Popover colors */
+  --popover: #1a1f2e;
+  --popover-foreground: #f8fafc;
+  
+  /* Primary color */
+  --primary: #0070FF;
+  --primary-foreground: #ffffff;
+  
+  /* Secondary colors */
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
+  
+  /* Muted colors */
+  --muted: #1a1f2e;
+  --muted-foreground: #94a3b8;
+  
+  /* Accent colors */
+  --accent: #1560BD;
+  --accent-foreground: #ffffff;
+  
+  /* Destructive colors */
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  
+  /* Border and input */
+  --border: #2d3748;
+  --input: #2d3748;
+  --ring: #0070FF;
+  
+  /* Gradient colors */
+  --gradient-start: #0070FF;
+  --gradient-end: #1560BD;
+  
+  /* Glass effect */
+  --glass-bg: rgba(26, 31, 46, 0.7);
+  
+  /* Chart colors */
+  --chart-1: #0070FF;
+  --chart-2: #1560BD;
+  --chart-3: #0076B6;
+  --chart-4: #91A3B0;
+  --chart-5: #0059CF;
+  
+  /* Sidebar colors */
+  --sidebar: #1a1f2e;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #0070FF;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1e293b;
+  --sidebar-accent-foreground: #f8fafc;
+  --sidebar-border: #2d3748;
+  --sidebar-ring: #0070FF;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    letter-spacing: normal;
+  }
+  
+  /* Enhanced link hover effects */
+  a {
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom utilities for consistent typography */
+@utility heading-hero {
+  font-size: 4rem;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-family: 'DM Sans', sans-serif;
+}
+
+@utility heading-xl {
+  font-size: 3rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  font-family: 'DM Sans', sans-serif;
+}
+
+@utility heading-lg {
+  font-size: 2.25rem;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  font-family: 'DM Sans', sans-serif;
+}
+
+@utility heading-md {
+  font-size: 1.875rem;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-family: 'DM Sans', sans-serif;
+}
+
+@utility heading-sm {
+  font-size: 1.5rem;
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  font-family: 'DM Sans', sans-serif;
+}
+
+@utility body-lg {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  font-weight: 400;
+}
+
+@utility body-md {
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+@utility body-sm {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+/* Glass morphism effect */
+@utility glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Gradient text */
+@utility gradient-text {
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Smooth transitions */
+@utility transition-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover lift effect */
+@utility hover-lift {
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(95, 180, 156, 0.3), 0 10px 10px -5px rgba(65, 66, 136, 0.2);
+  }
+}
+
+/* Card shadow utilities */
+@utility card-shadow {
+  box-shadow: 0 4px 6px -1px rgba(95, 180, 156, 0.1), 
+              0 2px 4px -1px rgba(65, 66, 136, 0.06);
+}
+
+@utility card-shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(95, 180, 156, 0.2), 
+              0 4px 6px -2px rgba(65, 66, 136, 0.1);
+}
+
+@utility card-shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(95, 180, 156, 0.25), 
+              0 10px 10px -5px rgba(65, 66, 136, 0.15);
+}
+
+/* Animation keyframes */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+  opacity: 0;
 }

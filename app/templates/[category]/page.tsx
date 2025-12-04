@@ -1,0 +1,166 @@
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
+import { getTemplates, getCategories } from '@/lib/templates-data';
+import { CategoryPageClient } from '@/components/CategoryPageClient';
+import { slugify } from '@/lib/slug-utils';
+import { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
+  const categorySlug = decodeURIComponent(params.category);
+  const categories = getCategories();
+  const allTemplates = getTemplates();
+  
+  const category = categories.find((c) => c.urlPath.toLowerCase() === categorySlug.toLowerCase());
+  
+  const isEmailClientFilter = categorySlug.toLowerCase() === 'all-email-clients';
+  const isESPFilter = categorySlug.toLowerCase() === 'all-integrations';
+  
+  let title: string;
+  let description: string;
+  
+  if (isEmailClientFilter) {
+    title = 'All Email Clients - HTML Email Templates';
+    description = 'Browse templates compatible with all email clients including Gmail, Outlook, Yahoo, Apple Mail and more';
+  } else if (isESPFilter) {
+    title = 'All Integrations - HTML Email Templates';
+    description = 'Browse templates compatible with all Email Service Providers (ESPs) and integrations';
+  } else if (category) {
+    title = category.h1 || category.listingName || categorySlug.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
+    description = category.metaDescription || category.listingDescription || `Browse our collection of ${title} email templates`;
+  } else {
+    title = categorySlug.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
+    description = `Browse our collection of ${title} HTML email templates`;
+  }
+  
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `https://bestemailtemplate.com/templates/${categorySlug}`,
+    },
+    twitter: {
+      title,
+      description,
+    },
+  };
+}
+
+export default function CategoryPage({ params }: { params: { category: string } }) {
+  const categorySlug = decodeURIComponent(params.category);
+  const allTemplates = getTemplates();
+  const categories = getCategories();
+  
+  // Find the category by URL path
+  const category = categories.find((c) => c.urlPath.toLowerCase() === categorySlug.toLowerCase());
+
+  // Determine if this is a special filter category (email clients or ESPs)
+  const isEmailClientFilter = categorySlug.toLowerCase() === 'all-email-clients';
+  const isESPFilter = categorySlug.toLowerCase() === 'all-integrations';
+  
+  // Filter templates based on category type
+  let categoryTemplates = allTemplates;
+  
+  if (isEmailClientFilter || isESPFilter) {
+    // For "All Email Clients" or "All Integrations", show all templates
+    categoryTemplates = allTemplates;
+  } else {
+    // First check if it matches any email client
+    const matchesEmailClient = allTemplates.some(t => 
+      t.supportedEmailClients.some(client => slugify(client) === categorySlug.toLowerCase())
+    );
+    
+    // Then check if it matches any ESP
+    const matchesESP = allTemplates.some(t => 
+      t.supportedESPs.some(esp => slugify(esp) === categorySlug.toLowerCase())
+    );
+    
+    if (matchesEmailClient) {
+      // Filter by email client
+      categoryTemplates = allTemplates.filter(t => 
+        t.supportedEmailClients.some(client => slugify(client) === categorySlug.toLowerCase())
+      );
+    } else if (matchesESP) {
+      // Filter by ESP
+      categoryTemplates = allTemplates.filter(t => 
+        t.supportedESPs.some(esp => slugify(esp) === categorySlug.toLowerCase())
+      );
+    } else {
+      // Filter by industry, useCase, or type using slugified comparison
+      categoryTemplates = allTemplates.filter((t) => {
+        return (
+          slugify(t.industry) === categorySlug.toLowerCase() ||
+          slugify(t.useCase) === categorySlug.toLowerCase() ||
+          slugify(t.type) === categorySlug.toLowerCase()
+        );
+      });
+    }
+  }
+
+  if (categoryTemplates.length === 0) {
+    notFound();
+  }
+
+  // Determine display title and description
+  let displayTitle: string;
+  let displayDescription: string;
+  
+  if (isEmailClientFilter) {
+    displayTitle = 'All Email Clients';
+    displayDescription = 'Browse templates compatible with all email clients including Gmail, Outlook, Yahoo, Apple Mail and more';
+  } else if (isESPFilter) {
+    displayTitle = 'All Integrations';
+    displayDescription = 'Browse templates compatible with all Email Service Providers (ESPs) and integrations';
+  } else {
+    // Use H1 from category CSV, fallback to listing name or formatted slug
+    displayTitle = category?.h1 || category?.listingName || categorySlug.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
+    displayDescription = category?.listingDescription || `Browse our collection of ${displayTitle.replace(' HTML Email Templates', '').replace(' Email Templates', '')} email templates`;
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      
+      {/* Breadcrumb */}
+      <div className="border-b border-border bg-background">
+        <div className="mx-auto max-w-7xl px-4 py-4">
+          <div className="flex items-center gap-2 text-sm">
+            <Link href="/templates" className="text-primary hover:underline">
+              Email Templates
+            </Link>
+            <span className="text-muted-foreground">&gt;</span>
+            <span className="text-foreground">{displayTitle}</span>
+          </div>
+        </div>
+      </div>
+
+      <main className="flex-1">
+        {/* Category Header */}
+        <section className="py-12 px-4 bg-muted/30">
+          <div className="mx-auto max-w-7xl text-center">
+            <h1 className="text-4xl font-bold text-foreground mb-4">
+              {displayTitle} Email Templates
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              {displayDescription}
+            </p>
+            <p className="text-sm text-muted-foreground mt-2">
+              {categoryTemplates.length} templates available
+            </p>
+          </div>
+        </section>
+
+        <CategoryPageClient 
+          templates={categoryTemplates} 
+          allTemplates={allTemplates}
+          currentCategory={categorySlug} 
+        />
+      </main>
+      
+      <Footer />
+    </div>
+  );
+}

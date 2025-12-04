@@ -46,13 +46,18 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Privacy Policy Column */}
+          {/* Legal Column */}
           <div>
             <h3 className="heading-sm text-foreground mb-4">Legal</h3>
             <ul className="space-y-3">
               <li>
                 <Link href="/privacy" className="body-sm text-muted-foreground hover:text-primary transition-smooth hover:translate-x-1 inline-block">
                   Privacy & Consent
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="body-sm text-muted-foreground hover:text-primary transition-smooth hover:translate-x-1 inline-block">
+                  Terms & Conditions
                 </Link>
               </li>
             </ul>

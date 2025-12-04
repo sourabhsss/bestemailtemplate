@@ -105,12 +105,13 @@ export default async function TemplatePage({ params }: { params: Promise<{ slug:
             {/* Left Column - Template Preview */}
             <div className="flex justify-center lg:justify-start">
               <div className="relative w-full max-w-md">
-                <div className="relative aspect-[3/4] rounded-lg overflow-hidden border border-primary/20 shadow-lg">
+                <div className="relative aspect-[3/4] rounded-lg overflow-y-auto overflow-x-hidden border border-primary/20 shadow-lg">
                   <Image
                     src={template.thumbnailUrl}
                     alt={template.title}
-                    fill
-                    className="object-cover object-top"
+                    width={500}
+                    height={667}
+                    className="w-full h-auto"
                   />
                 </div>
               </div>
